@@ -24,6 +24,7 @@ struct Vehicle
         setSpeed(100);
     }
 protected:
+    friend class HighwayPatrol;
     int speed = 0;
     std::string name;
 };
