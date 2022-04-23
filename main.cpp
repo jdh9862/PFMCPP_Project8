@@ -53,7 +53,6 @@ your task:
 
 #include <iostream>
 #include <vector>
-#include <algorithm>
 #include "Highway.h"
 #include "Car.h"
 #include "Motorcycle.h"
