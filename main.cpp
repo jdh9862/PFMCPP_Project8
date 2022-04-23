@@ -54,7 +54,6 @@ your task:
 #include <iostream>
 #include <vector>
 #include <algorithm>
-#include <cassert>
 #include "Highway.h"
 #include "Car.h"
 #include "Motorcycle.h"
@@ -81,7 +80,7 @@ int main()
     
     std::vector<Car> cars;
     std::vector<Motorcycle> motorcycles;
-//    std::vector<SemiTruck> trucks;
+    std::vector<SemiTruck> trucks;
     
     /*
      instantiating vectors like this creates unexpected copies during the construction process:
@@ -110,7 +109,7 @@ int main()
     /*
      In order to correctly construct an object in-place inside a vector, we must first reserve space for it.
      
-     reserve how ever many cars, motorcycles, and trucks you'll create first
+     reserve however many cars, motorcycles, and trucks you'll create first
      */
     cars.reserve(3); //reserving room for 3 Car instances
     
@@ -125,18 +124,38 @@ int main()
     /*
      construct 2 more Car instances via emplace_back.
      */
-    
+    cars.emplace_back("alan");
+    cars.emplace_back("steve");
+
     /*
      now reserve and emplace_back your Trucks and Motorcyles
      */
-    
-    
-    
-    
-    assert(false);
+    motorcycles.reserve(2);
+    motorcycles.emplace_back("kyle");
+    motorcycles.emplace_back("sophie");
+
+    trucks.reserve(2);
+    trucks.emplace_back("tony");
+    trucks.emplace_back("carol");
+
     //add the cars, motorcycles and trucks to the highway using range-based for() loops: for( element : vec ) { ... }
     //be careful to not accidentally make element copies when iterating.
-    
+
+    for (Car &car : cars)
+    {
+        highway.addVehicle(&car);
+    }
+
+    for (Motorcycle &motorcycle : motorcycles)
+    {
+        highway.addVehicle(&motorcycle);
+    }
+
+    for (SemiTruck &truck : trucks)
+    {
+        highway.addVehicle(&truck);
+    }
+
     HighwayPatrol cop;
     cop.scanHighway(&highway);
 
