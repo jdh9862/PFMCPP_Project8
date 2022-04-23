@@ -1,4 +1,5 @@
 #include "HighwayPatrol.h"
+#include "Highway.h"
 #include "Car.h"
 #include "Motorcycle.h"
 #include "SemiTruck.h"
@@ -9,6 +10,12 @@ HighwayPatrol::HighwayPatrol() : Vehicle("HighwayPatrol")
 {
 
 }
+
+HighwayPatrol::~HighwayPatrol() = default;
+
+HighwayPatrol::HighwayPatrol(const HighwayPatrol&) = default;
+
+HighwayPatrol& HighwayPatrol::operator=(const HighwayPatrol&) = default;
 
 void HighwayPatrol::scanHighway(Highway* h)
 {
