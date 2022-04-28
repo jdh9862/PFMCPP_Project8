@@ -53,8 +53,11 @@ your task:
 
 #include <iostream>
 #include <vector>
-#include <algorithm>
-#include <cassert>
+#include "Highway.h"
+#include "Car.h"
+#include "Motorcycle.h"
+#include "SemiTruck.h"
+#include "HighwayPatrol.h"
 
 /*
  MAKE SURE YOU ARE NOT ON THE MASTER BRANCH
@@ -73,65 +76,85 @@ your task:
 int main()
 {
     Highway highway;
-    
+
     std::vector<Car> cars;
     std::vector<Motorcycle> motorcycles;
     std::vector<SemiTruck> trucks;
-    
+
     /*
      instantiating vectors like this creates unexpected copies during the construction process:
-     
+
      std::vector<std::string> strings
      {
         std::string("a string"),
         std::string("another string)"
      };
-     
+
      We have not learned how to properly implement copy constructors or copy assignment operators yet at this point in the course.
      These functions are part of the group of special member functions that all UDTs have.
-     
+
      Instead we will learn about in-place construction to avoid making unexpected copies of our UDTs.
      Unexpected copies could cause Undefined Behavior (UB)
      The rule of 3-5-0 video will explain these special member functions and this UB in more detail.
-     
+
      For now, these special member functions will be implemented using the compiler's default implementation.
      the Vehicle class shows how to do this.
-     
+
      You must implement these special member functions for all of the classes that derive from Vehicle.
 
      v-table warnings can be resolved by eliminating header file implementations.
      */
-    
+
     /*
      In order to correctly construct an object in-place inside a vector, we must first reserve space for it.
-     
-     reserve how ever many cars, motorcycles, and trucks you'll create first
+
+     reserve however many cars, motorcycles, and trucks you'll create first
      */
     cars.reserve(3); //reserving room for 3 Car instances
-    
+
     /*
      Now that we have reserved space for our UDT instances inside the vector, we can construct them in-place inside the vector.
      emplace_back is passed the constructor arguments for your UDT.
-     
+
      use the vector member function 'emplace_back' to construct your car/truck/motorcycle instances in-place
      */
     cars.emplace_back("janice"); //constructing the first Car instance in-place in the cars vector
-    
+
     /*
      construct 2 more Car instances via emplace_back.
      */
-    
+    cars.emplace_back("alan");
+    cars.emplace_back("steve");
+
     /*
      now reserve and emplace_back your Trucks and Motorcyles
      */
-    
-    
-    
-    
-    assert(false);
+    motorcycles.reserve(2);
+    motorcycles.emplace_back("kyle");
+    motorcycles.emplace_back("sophie");
+
+    trucks.reserve(2);
+    trucks.emplace_back("tony");
+    trucks.emplace_back("carol");
+
     //add the cars, motorcycles and trucks to the highway using range-based for() loops: for( element : vec ) { ... }
     //be careful to not accidentally make element copies when iterating.
-    
+
+    for (auto& car: cars)
+    {
+        highway.addVehicle(&car);
+    }
+
+    for (auto& motorcycle: motorcycles)
+    {
+        highway.addVehicle(&motorcycle);
+    }
+
+    for (auto& truck: trucks)
+    {
+        highway.addVehicle(&truck);
+    }
+
     HighwayPatrol cop;
     cop.scanHighway(&highway);
 
