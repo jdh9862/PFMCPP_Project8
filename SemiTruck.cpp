@@ -1,6 +1,6 @@
 #include "SemiTruck.h"
 
-SemiTruck::SemiTruck(const std::string &n) : Vehicle(n) { }
+SemiTruck::SemiTruck(const std::string& n) : Vehicle(n) {}
 
 SemiTruck::~SemiTruck() = default;
 
